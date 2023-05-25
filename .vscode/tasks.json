@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "clang++ build active file",
+			"type": "shell",
+			"command": "clang++",
+			"args": [
+				"${fileBasename}",
+				"-o",
+				"${fileBasenameNoExtension}.out",
+				"-g",
+				"-std=c++11"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+	]
+}

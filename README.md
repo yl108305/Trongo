@@ -4,8 +4,9 @@
 
 <img width="100%" src="https://github.com/GG4mida/profanity-tron/blob/main/screenshot/demo.png?raw=true"/>
 
-- ⚠️ Fbi Warning 1: 该程序仅用于学习交流，请勿用于非法用途。
-- ⚠️ Fbi Warning 2: 本程序仅在本仓库发布并更新，请勿下载运行其它来路不明的版本，由此造成的一切损失，请自行承担。
+⚠️ Fbi Warning 1: 该程序仅用于学习交流，请勿用于非法用途。
+
+⚠️ Fbi Warning 2: 本程序仅在本仓库发布并更新，请勿下载运行其它来路不明的版本，由此造成的一切损失，请自行承担。
 
 ## 说明
 
@@ -73,14 +74,16 @@ Fbi Warning:
 
 ### 命令说明
 
-- --help: 查看帮助说明
-- --matching: 固定写法，后面跟上匹配规则文件
-- --prefix-count: 最少匹配前缀位数，默认 0。比如你可以配置为 8，那就匹配 8 个 T 的地址
-- --suffix-count: 最少匹配后缀位数，默认 6。比如你可以配置为 10，那就匹配 10 位的后缀（10位其实挺难的，估计要跑到天荒地老 :<）
-- --quit-count: 生成的地址达到指定的数量，即退出程序。比如你就想匹配一个地址，那就配置为 1。系统默认退出数量为 120
-- --output: 将生成的地址输出到文件（追加）。一行一个，格式如：privatekey,address
-- --post: 将生成的地址，发送到（POST）指定的 url，每生成一条就会发送一次。数据格式为：privatekey=xx&address=yy。这个配置主要便于其它系统的集成
-- --skip: 跳过指定索引的 gpu 设备，如启动软件出现异常，请使用此参数跳过设备集成显卡
+|  参数  | 说明  |
+|  ----  | ----  |
+|--help|查看帮助说明|
+|--matching|固定写法，后面跟上匹配规则文件|
+|--prefix-count|最少匹配前缀位数，默认 0。比如你可以配置为 8，那就匹配 8 个 T 的地址|
+|--suffix-count|最少匹配后缀位数，默认 6。比如你可以配置为 10，那就匹配 10 位的后缀（10位其实挺难的，估计要跑到天荒地老 :<）|
+|--quit-count|生成的地址达到指定的数量，即退出程序。比如你就想匹配一个地址，那就配置为 1。系统默认退出数量为 120|
+|--output|将生成的地址输出到文件（追加）。一行一个，格式如：privatekey,address|
+|--post|将生成的地址，发送到（GET）指定的 url，每生成一条就会发送一次。数据格式为：privatekey=xx&address=yy。这个配置主要便于其它系统的集成|
+|--skip|跳过指定索引的 gpu 设备，如启动软件出现异常，请使用此参数跳过设备集成显卡|
 
 ### 匹配规则
 
@@ -89,7 +92,7 @@ Fbi Warning:
 #### 单个地址
 
 ```bash
-./profanity --matching TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D --prefix-count 2 --suffix-count 4 --quit-count 1
+./profanity --matching TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D --prefix-count 2 --suffix-count 4
 ```
 
 #### 文件
@@ -114,11 +117,14 @@ TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D
 ## 开发
 
 > 这里主要讲讲如何构建 `windows` 平台的 `exe 可执行程序`。`mac` 机器理论上可直接 `make`，然后执行就行。
+
 > 本人在开发的时候，是买了一台阿里云 `v100 gpu卡` + `windows server 2022` 的抢占式实例。如果已经有对应的开发环境，可以不用花这个钱。
 
-- 首先远程连接到服务器。
+### 连接到服务器
 
-- 安装显卡驱动，步骤如下：
+> ssh，你懂的。
+
+### 安装显卡驱动
 
 1. 打开 `nvidia` 驱动下载网站：[https://www.nvidia.cn/Download/index.aspx?lang=cn](https://www.nvidia.cn/Download/index.aspx?lang=cn)
 
@@ -130,7 +136,7 @@ TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D
 
 <img width="100%" src="https://github.com/GG4mida/profanity-tron/blob/main/screenshot/gpu.png?raw=true"/>
 
-- 安装 `visual studio`，步骤如下：
+### 安装 `visual studio`
 
 1. 打开 `visual studio` 官网：[https://visualstudio.microsoft.com/zh-hans/vs/](https://visualstudio.microsoft.com/zh-hans/vs/)
 
@@ -144,13 +150,13 @@ TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D
 
 4. 以上软件安装完成后，就可以直接双击源码目录下面的 `profanity.sln`，打开项目进行开发了。
 
-5. 关于 `visual studio` 如何开发、调试、构建 `cpp` 应用程序，不再本文档讨论范围。
+> 关于 `visual studio` 如何开发、调试、构建 `cpp` 应用程序，不再本文档讨论范围。
 
 ### 开发备注
 
-> 不论开发环境是 `windows` 还是 `mac`，在开发调试时可手动指定 `-I` 参数，将其设置为一个较小的值，可极大加快启动速度。
-> `mac` 环境可能需要指定 `-w 1`，以生成正确的私钥。
-> 部分平台启动异常，可能需要使用 `-s` 参数，跳过设备搭载的集成显卡设备。
+- 不论开发环境是 `windows` 还是 `mac`，在开发调试时可手动指定 `-I` 参数，将其设置为一个较小的值，可极大加快启动速度。
+- `mac` 环境可能需要指定 `-w 1`，以生成正确的私钥。
+- 部分平台启动异常，可能需要使用 `-s` 参数，跳过设备搭载的集成显卡设备。
 
 ## 速度
 
@@ -159,6 +165,8 @@ TUqEg3dzVEJNQSVW2HY98z5X8SBdhmao8D
 <img width="100%" src="https://github.com/GG4mida/profanity-tron/blob/main/screenshot/demo.png?raw=true"/>
 
 > 本程序除了在开发机（一台老旧的 Mac），以及上述 `NVIDIA v100` 显卡上经过测试外，未在其它设备上进行速度测试。
+
+> 请不要纠结于对比各种设备、各种平台差异化的运行速度。没意义。
 
 ## 验证
 
@@ -214,7 +222,7 @@ cl_ulong4 Dispatcher::Device::createSeed()
 
 ## 一点题外话
 
-👉 现有市面上流出的 `tron gpu` 类程序，基本上都是基于 `eth profanity` 修改而来。从技术角度来讲，如果出于作恶的目的，完全可以对原版程序的漏洞 `变本加厉`，做到 `秒秒钟` 的私钥爆破。尤其是在不提供源码，仅有一个 `exe 可执行程序` 的情况下，会让作恶的逻辑更加的黑盒。因此再次建议请勿运行任何 `非透明` 的可执行程序，在币圈这种社会达尔文主义盛行的行业，由此导致的资产损失可以说每天都在上演。言尽于此，祝大家好运 🤝
+现有市面上流出的 `tron gpu` 类程序，基本上都是基于 `eth profanity` 修改而来。从技术角度来讲，如果出于作恶的目的，完全可以对原版程序的漏洞 `变本加厉`，做到 `秒秒钟` 的私钥爆破。尤其是在不提供源码，仅有一个 `exe 可执行程序` 的情况下，会让作恶的逻辑更加的黑盒。因此再次建议请勿运行任何 `非透明` 的可执行程序，在币圈这种社会达尔文主义盛行的行业，由此导致的资产损失可以说每天都在上演。言尽于此，祝大家好运 🤝
 
 ## 联系
 

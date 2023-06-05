@@ -223,7 +223,7 @@ int main(int argc, char **argv)
 			return 1;
 		}
 
-		if (suffixCount <= 0)
+		if (suffixCount < 0)
 		{
 			suffixCount = 6;
 		}
